@@ -13,19 +13,20 @@ from plotly.colors import DEFAULT_PLOTLY_COLORS
 
 # IMPORT & Proprecessing data
 
-dash_db = pymysql.connect(
-    user='root', 
-    passwd='0000', 
-    host='127.0.0.1', 
-    db='dash', 
-    charset='utf8')
+#dash_db = pymysql.connect(
+#    user='root', 
+#    passwd='0000', 
+#    host='127.0.0.1', 
+#    db='dash', 
+#    charset='utf8')
 
-cursor_dash = dash_db.cursor(pymysql.cursors.DictCursor)
-cursor_dash.execute("select * from dash.saledata")
-saledata_dic = cursor_dash.fetchall()
+#cursor_dash = dash_db.cursor(pymysql.cursors.DictCursor)
+#cursor_dash.execute("select * from dash.saledata")
+#saledata_dic = cursor_dash.fetchall()
 
-saledata = pd.DataFrame(saledata_dic)
-saledata.head()
+#saledata = pd.DataFrame(saledata_dic)
+saledata = pd.read_csv('data/saledata.csv')
+#saledata.head()
 
 saledata['Margin'] = saledata['Revenue'] - saledata['Cost']
 saledata['year'] = pd.DatetimeIndex(saledata['OrderDate']).year
